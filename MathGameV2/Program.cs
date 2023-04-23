@@ -1,6 +1,7 @@
 ﻿using MathGameLibrary.Data;
 using MathGameLibrary.Logic;
 using MathGameLibrary.Player;
+using System.Diagnostics;
 
 WelcomeUser();
 Player player = new()
@@ -29,7 +30,8 @@ void DisplayGameHistory(Player player)
     {
         Console.Write($"Game {player.GameHistory.IndexOf(game) + 1}  ");
         Console.Write($"Operation: {game.GameType} ");
-        Console.WriteLine($"[{game.GameDifficulty}]");
+        Console.Write($"[{game.GameDifficulty}] ");
+        Console.WriteLine($"Time: {game.GameTime:mm\\:ss}");
         Console.Write($"{game.CorrectAnswers} of {game.NumberOfQuestions} correct. ");
         Console.WriteLine($"Game score: {game.Score:p0}");
         Console.WriteLine();
@@ -127,7 +129,7 @@ void PlayRound(Player player)
         NumberOfQuestions = 10,
         GameDifficulty = GetDifficulty(),
 };
-
+    Stopwatch timer = Stopwatch.StartNew();
     for (int i = 0; i < round.NumberOfQuestions; i++)
     {
         Console.Write(round.GenerateProblem());
@@ -135,7 +137,8 @@ void PlayRound(Player player)
         bool isCorrect = round.CheckGuess(guessNumber);
         DisplayResult(isCorrect, player, round);
     }
-
+    timer.Stop();
+    round.GameTime = timer.Elapsed;
     DisplayScore(round);
     player.GameHistory.Add(round);
 }
@@ -168,7 +171,7 @@ void DisplayResult(bool isCorrect, Player player, Game round)
 void DisplayScore(Game round)
 {
     Console.Write($"{round.CorrectAnswers} out of {round.NumberOfQuestions} correct. ");
-    Console.WriteLine($"Score: {round.Score:p0}");
+    Console.WriteLine($"Score: {round.Score:p0} Time: {round.GameTime:mm\\:ss}");
 }
 
 string MenuChoice(Player player)
