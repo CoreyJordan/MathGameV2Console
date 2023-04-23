@@ -80,6 +80,7 @@ void PlayRound(Player player, Operator gameMode)
     {
         Console.Write(round.GenerateProblem());
         int guessNumber = GetPlayerGuess(player);
+        bool isCorrect = round.CheckGuess(guessNumber);
     }
 }
 

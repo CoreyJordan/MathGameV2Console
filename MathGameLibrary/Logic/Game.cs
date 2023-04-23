@@ -33,6 +33,17 @@ public class Game
         }
         return $"{Number1} {OperatorSymbol} {Number2} = ";
     }
+
+    public bool CheckGuess(int guessNumber)
+    {
+        bool isCorrect = false;
+        if (guessNumber == GetAnswer())
+        {
+            isCorrect = true;
+        }
+        return isCorrect;
+    }
+
     private char GetSymbol()
     {
         return GameType switch
@@ -41,6 +52,17 @@ public class Game
             Operator.Multiply => '*',
             Operator.Divide => '/',
             _ => '+'
+        };
+    }
+
+    private int GetAnswer()
+    {
+        return GameType switch
+        {
+            Operator.Subtract => Number1 - Number2,
+            Operator.Multiply => Number1 * Number2,
+            Operator.Divide => Number1 / Number2,
+            _ => Number1 + Number2,
         };
     }
 }
