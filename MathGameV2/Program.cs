@@ -8,16 +8,18 @@ Player player = new()
     PlayerName = GetPlayerName()
 };
 
-bool playAgain = false;
-do
+bool play = true;
+while (play)
 {
     PlayRound(player);
 
     Console.Write("Hit Enter to continue...");
     Console.ReadLine();
 
-    playAgain = MenuSelect(MenuChoice(player));
-} while (playAgain);
+    play = MenuSelect(MenuChoice(player));
+}
+Console.WriteLine($"Thanks for playing, {player.PlayerName}!");
+Console.ReadLine();
 
 
 void DisplayGameHistory(Player player)
