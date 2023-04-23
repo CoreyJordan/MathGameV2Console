@@ -10,6 +10,14 @@ public class Game
     public int Number1 { get; private set; }
     public int Number2 { get; private set; }
     public char OperatorSymbol { get; private set; }
+    public double Score 
+    {
+        get 
+        {
+            return (double)CorrectAnswers / NumberOfQuestions;
+
+        }
+    }
 
     public Game()
     {
@@ -54,11 +62,6 @@ public class Game
             Operator.Divide => Number1 / Number2,
             _ => Number1 + Number2,
         };
-    }
-
-    public double GetScore() 
-    {
-        return (double)CorrectAnswers / NumberOfQuestions;
     }
 
     private char GetSymbol()

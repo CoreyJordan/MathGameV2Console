@@ -7,12 +7,23 @@ Player player = new()
 {
     PlayerName = GetPlayerName()
 };
-Operator gameMode = GetGameMode(player);
 
-PlayRound(player, gameMode);
-Console.Write("Hit Enter to continue...");
-Console.ReadLine();
+bool playAgain = false;
+do
+{
+    PlayRound(player);
 
+    Console.Write("Hit Enter to continue...");
+    Console.ReadLine();
+
+    playAgain = MenuSelect(MenuChoice(player));
+} while (playAgain);
+
+
+void DisplayGameHistory(Player player)
+{
+
+}
 
 static void WelcomeUser()
 {
@@ -69,11 +80,11 @@ static Operator GetGameMode(Player player)
     };
 }
 
-void PlayRound(Player player, Operator gameMode)
+void PlayRound(Player player)
 {
     Game round = new()
     {
-        GameType = gameMode,
+        GameType = GetGameMode(player),
         NumberOfQuestions = 10,
         IntRange = 100
     };
@@ -119,5 +130,38 @@ void DisplayScore(Game round)
 {
     Console.Clear();
     Console.Write($"{round.CorrectAnswers} out of {round.NumberOfQuestions} correct. ");
-    Console.WriteLine($"Score: {round.GetScore():p0}");
+    Console.WriteLine($"Score: {round.Score:p0}");
+}
+
+string MenuChoice(Player player)
+{
+    string[] menuChoices = new[] { "1", "2", "3" };
+    string choice;
+
+    Console.Clear();
+    do
+    {
+        Console.WriteLine($"{player.PlayerName}, Do you want to:");
+        Console.WriteLine("    1: View Game History");
+        Console.WriteLine("    2: Play Again");
+        Console.WriteLine("    3: Quit");
+        choice = Console.ReadLine()!;
+    } while (!menuChoices.Contains(choice));
+
+    return choice;
+}
+
+bool MenuSelect(string choice)
+{
+    bool keepPlaying = false;
+    if (choice == "1")
+    {
+        DisplayGameHistory(player);
+        keepPlaying = MenuSelect(MenuChoice(player));
+    }
+    else if (choice == "2")
+    {
+        keepPlaying = true;
+    }
+    return keepPlaying;
 }
