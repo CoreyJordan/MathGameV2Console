@@ -22,7 +22,20 @@ do
 
 void DisplayGameHistory(Player player)
 {
-
+    Console.Clear();
+    foreach (Game game in player.GameHistory)
+    {
+        Console.Write($"Game {player.GameHistory.IndexOf(game) + 1}  ");
+        Console.WriteLine($"Operation: {game.GameType}");
+        Console.Write($"{game.CorrectAnswers} of {game.NumberOfQuestions} correct.");
+        Console.WriteLine($"Game score: {game.Score:p0}%");
+        Console.WriteLine();
+    }
+    Console.WriteLine($"Number of games played: {player.GameHistory.Count}");
+    Console.WriteLine($"Overall Score: {player.Score:p0}");
+    Console.WriteLine();
+    Console.Write("Hit Enter to continue...");
+    Console.ReadLine();
 }
 
 static void WelcomeUser()
@@ -128,7 +141,6 @@ void DisplayResult(bool isCorrect, Player player, Game round)
 
 void DisplayScore(Game round)
 {
-    Console.Clear();
     Console.Write($"{round.CorrectAnswers} out of {round.NumberOfQuestions} correct. ");
     Console.WriteLine($"Score: {round.Score:p0}");
 }
