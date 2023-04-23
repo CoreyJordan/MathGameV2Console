@@ -28,5 +28,7 @@
 <br>
 <h2>ChangeLog</h2>
 <p>
-  Base game finished 4/23/23
+  Base game finished 4/23/23<br>
+  Difficulty added 4/23/23<br>
+  Timer added 4/23/23
 </p>
