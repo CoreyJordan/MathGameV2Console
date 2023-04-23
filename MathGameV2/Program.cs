@@ -27,8 +27,8 @@ void DisplayGameHistory(Player player)
     {
         Console.Write($"Game {player.GameHistory.IndexOf(game) + 1}  ");
         Console.WriteLine($"Operation: {game.GameType}");
-        Console.Write($"{game.CorrectAnswers} of {game.NumberOfQuestions} correct.");
-        Console.WriteLine($"Game score: {game.Score:p0}%");
+        Console.Write($"{game.CorrectAnswers} of {game.NumberOfQuestions} correct. ");
+        Console.WriteLine($"Game score: {game.Score:p0}");
         Console.WriteLine();
     }
     Console.WriteLine($"Number of games played: {player.GameHistory.Count}");
