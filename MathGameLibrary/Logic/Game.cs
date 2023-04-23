@@ -4,12 +4,26 @@ namespace MathGameLibrary.Logic;
 public class Game
 {
     public Operator GameType { get; set; }
+    public Difficulty GameDifficulty { get; set; }
     public int NumberOfQuestions { get; set; }
-    public int IntRange { get; set; }
     public int CorrectAnswers { get; set; }
     public int Number1 { get; private set; }
     public int Number2 { get; private set; }
     public char OperatorSymbol { get; private set; }
+    public int IntRange
+    {
+        get
+        {
+            return GameDifficulty switch
+            {
+                Difficulty.Easy => 10,
+                Difficulty.Normal => 100,
+                Difficulty.Hard => 200,
+                _ => 100
+            };
+        }
+            
+    }
     public double Score 
     {
         get 
@@ -22,6 +36,7 @@ public class Game
     public Game()
     {
         CorrectAnswers = 0;
+        
     }
 
     public string GenerateProblem()

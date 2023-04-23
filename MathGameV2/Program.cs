@@ -28,7 +28,8 @@ void DisplayGameHistory(Player player)
     foreach (Game game in player.GameHistory)
     {
         Console.Write($"Game {player.GameHistory.IndexOf(game) + 1}  ");
-        Console.WriteLine($"Operation: {game.GameType}");
+        Console.Write($"Operation: {game.GameType} ");
+        Console.WriteLine($"[{game.GameDifficulty}]");
         Console.Write($"{game.CorrectAnswers} of {game.NumberOfQuestions} correct. ");
         Console.WriteLine($"Game score: {game.Score:p0}");
         Console.WriteLine();
@@ -67,6 +68,29 @@ static string GetPlayerName()
     return name;
 }
 
+Difficulty GetDifficulty()
+{
+    string[] menuChoices = new[] { "1", "2", "3" };
+    string choice = string.Empty;
+
+    while(!menuChoices.Contains(choice))
+    {
+        Console.WriteLine("Choose a difficulty level:");
+        Console.WriteLine("    1: Easy");
+        Console.WriteLine("    2: Normal");
+        Console.WriteLine("    3: Hard");
+        choice = Console.ReadLine()!;
+    }
+
+    Console.Clear();
+    return choice switch
+    {
+        "1" => Difficulty.Easy,
+        "3" => Difficulty.Hard,
+        _ => Difficulty.Normal
+    };
+}
+
 static Operator GetGameMode(Player player)
 {
     string[] options = new [] {"1", "2", "3", "4"};
@@ -101,8 +125,8 @@ void PlayRound(Player player)
     {
         GameType = GetGameMode(player),
         NumberOfQuestions = 10,
-        IntRange = 100
-    };
+        GameDifficulty = GetDifficulty(),
+};
 
     for (int i = 0; i < round.NumberOfQuestions; i++)
     {
