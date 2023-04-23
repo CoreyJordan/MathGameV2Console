@@ -1,12 +1,12 @@
-﻿using MathGameLibrary.Player;
+﻿using MathGameLibrary.Data;
+using MathGameLibrary.Player;
 
 WelcomeUser();
 Player player = new()
 {
     PlayerName = GetPlayerName()
 };
-
-
+Operator gameMode = GetGameMode(player);
 
 static void WelcomeUser()
 {
@@ -31,5 +31,35 @@ static string GetPlayerName()
             Console.Write("PLease eneter your name: ");
         }
     }
+    Console.Clear();
     return name;
 }
+
+static Operator GetGameMode(Player player)
+{
+    string[] options = new [] {"1", "2", "3", "4"};
+    string choice = string.Empty;
+
+    do
+    {
+        Console.WriteLine($"{player.PlayerName}, Choose from the following game types:");
+        Console.Write($"1: {Operator.Add}, 2: {Operator.Subtract}, 3: {Operator.Multiply}, 4: {Operator.Divide} ");
+        choice = Console.ReadLine()!;
+        
+        if (!options.Contains(choice))
+        {
+            Console.WriteLine();
+            Console.WriteLine("Sorry, that's not an option. Please try again.");
+        }
+    } while (!options.Contains(choice));
+
+    Console.Clear();
+    return choice switch
+    {
+        "2" => Operator.Subtract,
+        "3" => Operator.Multiply,
+        "4" => Operator.Divide,
+        _ => Operator.Add
+    };
+}
+
