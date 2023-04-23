@@ -107,4 +107,5 @@ void DisplayResult(bool isCorrect, Player player, Game round)
     {
         Console.WriteLine($"Sorry {player.PlayerName}, the correct answer is {round.GetAnswer()}");
     }
+    Console.WriteLine();
 }
