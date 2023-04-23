@@ -10,6 +10,8 @@ Player player = new()
 Operator gameMode = GetGameMode(player);
 
 PlayRound(player, gameMode);
+Console.Write("Hit Enter to continue...");
+Console.ReadLine();
 
 
 static void WelcomeUser()
@@ -83,6 +85,9 @@ void PlayRound(Player player, Operator gameMode)
         bool isCorrect = round.CheckGuess(guessNumber);
         DisplayResult(isCorrect, player, round);
     }
+
+    DisplayScore(round);
+    player.GameHistory.Add(round);
 }
 
 int GetPlayerGuess(Player player)
@@ -108,4 +113,11 @@ void DisplayResult(bool isCorrect, Player player, Game round)
         Console.WriteLine($"Sorry {player.PlayerName}, the correct answer is {round.GetAnswer()}");
     }
     Console.WriteLine();
+}
+
+void DisplayScore(Game round)
+{
+    Console.Clear();
+    Console.Write($"{round.CorrectAnswers} out of {round.NumberOfQuestions} correct. ");
+    Console.WriteLine($"Score: {round.GetScore():p0}");
 }

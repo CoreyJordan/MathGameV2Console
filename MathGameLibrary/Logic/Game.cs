@@ -45,6 +45,22 @@ public class Game
         return isCorrect;
     }
 
+    public int GetAnswer()
+    {
+        return GameType switch
+        {
+            Operator.Subtract => Number1 - Number2,
+            Operator.Multiply => Number1 * Number2,
+            Operator.Divide => Number1 / Number2,
+            _ => Number1 + Number2,
+        };
+    }
+
+    public double GetScore() 
+    {
+        return (double)CorrectAnswers / NumberOfQuestions;
+    }
+
     private char GetSymbol()
     {
         return GameType switch
@@ -56,14 +72,5 @@ public class Game
         };
     }
 
-    public int GetAnswer()
-    {
-        return GameType switch
-        {
-            Operator.Subtract => Number1 - Number2,
-            Operator.Multiply => Number1 * Number2,
-            Operator.Divide => Number1 / Number2,
-            _ => Number1 + Number2,
-        };
-    }
+   
 }
