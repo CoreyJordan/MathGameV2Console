@@ -1,4 +1,5 @@
 ﻿using MathGameLibrary.Data;
+using MathGameLibrary.Logic;
 using MathGameLibrary.Player;
 
 WelcomeUser();
@@ -7,6 +8,9 @@ Player player = new()
     PlayerName = GetPlayerName()
 };
 Operator gameMode = GetGameMode(player);
+
+PlayRound(player, gameMode);
+
 
 static void WelcomeUser()
 {
@@ -38,7 +42,7 @@ static string GetPlayerName()
 static Operator GetGameMode(Player player)
 {
     string[] options = new [] {"1", "2", "3", "4"};
-    string choice = string.Empty;
+    string choice;
 
     do
     {
@@ -62,4 +66,17 @@ static Operator GetGameMode(Player player)
         _ => Operator.Add
     };
 }
+
+static void PlayRound(Player player, Operator gameMode)
+{
+    Game round = new()
+    {
+        GameType = gameMode,
+        NumberOfQuestions = 10,
+        IntRange = 100
+    };
+
+    Console.WriteLine(round.GenerateProblem());
+}
+
 
