@@ -6,10 +6,15 @@ public class Game
     public Operator GameType { get; set; }
     public int NumberOfQuestions { get; set; }
     public int IntRange { get; set; }
+    public int CorrectAnswers { get; set; }
     public int Number1 { get; private set; }
     public int Number2 { get; private set; }
     public char OperatorSymbol { get; private set; }
 
+    public Game()
+    {
+        CorrectAnswers = 0;
+    }
 
     public string GenerateProblem()
     {

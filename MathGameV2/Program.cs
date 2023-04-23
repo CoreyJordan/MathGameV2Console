@@ -67,7 +67,7 @@ static Operator GetGameMode(Player player)
     };
 }
 
-static void PlayRound(Player player, Operator gameMode)
+void PlayRound(Player player, Operator gameMode)
 {
     Game round = new()
     {
@@ -76,7 +76,21 @@ static void PlayRound(Player player, Operator gameMode)
         IntRange = 100
     };
 
-    Console.WriteLine(round.GenerateProblem());
+    for (int i = 0; i < round.NumberOfQuestions; i++)
+    {
+        Console.Write(round.GenerateProblem());
+        int guessNumber = GetPlayerGuess(player);
+    }
 }
 
-
+int GetPlayerGuess(Player player)
+{
+    int playerGuess;
+    string input = Console.ReadLine()!;
+    while (!int.TryParse(input, out playerGuess))
+    {
+        Console.Write($"Sorry {player.PlayerName}, that's not a valid number. Please try again: ");
+        input = Console.ReadLine()!;
+    }
+    return playerGuess;
+}
