@@ -73,7 +73,7 @@ Difficulty GetDifficulty()
     string[] menuChoices = new[] { "1", "2", "3" };
     string choice = string.Empty;
 
-    while(!menuChoices.Contains(choice))
+    while(menuChoices.Contains(choice) == false)
     {
         Console.WriteLine("Choose a difficulty level:");
         Console.WriteLine("    1: Easy");
@@ -107,7 +107,7 @@ static Operator GetGameMode(Player player)
             Console.WriteLine();
             Console.WriteLine("Sorry, that's not an option. Please try again.");
         }
-    } while (!options.Contains(choice));
+    } while (options.Contains(choice) == false);
 
     Console.Clear();
     return choice switch
@@ -144,7 +144,7 @@ int GetPlayerGuess(Player player)
 {
     int playerGuess;
     string input = Console.ReadLine()!;
-    while (!int.TryParse(input, out playerGuess))
+    while (int.TryParse(input, out playerGuess) == false)
     {
         Console.Write($"Sorry {player.PlayerName}, that's not a valid number. Please try again: ");
         input = Console.ReadLine()!;
@@ -184,7 +184,7 @@ string MenuChoice(Player player)
         Console.WriteLine("    2: Play Again");
         Console.WriteLine("    3: Quit");
         choice = Console.ReadLine()!;
-    } while (!menuChoices.Contains(choice));
+    } while (menuChoices.Contains(choice) == false);
 
     return choice;
 }

@@ -88,7 +88,5 @@ public class Game
             Operator.Divide => '/',
             _ => '+'
         };
-    }
-
-   
+    } 
 }
