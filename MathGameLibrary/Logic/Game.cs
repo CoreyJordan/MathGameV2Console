@@ -40,6 +40,7 @@ public class Game
         if (guessNumber == GetAnswer())
         {
             isCorrect = true;
+            CorrectAnswers++;
         }
         return isCorrect;
     }
@@ -55,7 +56,7 @@ public class Game
         };
     }
 
-    private int GetAnswer()
+    public int GetAnswer()
     {
         return GameType switch
         {

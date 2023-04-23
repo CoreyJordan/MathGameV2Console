@@ -81,6 +81,7 @@ void PlayRound(Player player, Operator gameMode)
         Console.Write(round.GenerateProblem());
         int guessNumber = GetPlayerGuess(player);
         bool isCorrect = round.CheckGuess(guessNumber);
+        DisplayResult(isCorrect, player, round);
     }
 }
 
@@ -94,4 +95,16 @@ int GetPlayerGuess(Player player)
         input = Console.ReadLine()!;
     }
     return playerGuess;
+}
+
+void DisplayResult(bool isCorrect, Player player, Game round)
+{
+    if (isCorrect)
+    {
+        Console.WriteLine("Correct!");
+    }
+    else
+    {
+        Console.WriteLine($"Sorry {player.PlayerName}, the correct answer is {round.GetAnswer()}");
+    }
 }
