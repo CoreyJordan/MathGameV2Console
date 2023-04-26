@@ -71,11 +71,11 @@ public class Game
 
     public int GetAnswer()
     {
-        return GameType switch
+        return OperatorSymbol switch
         {
-            Operator.Subtract => Number1 - Number2,
-            Operator.Multiply => Number1 * Number2,
-            Operator.Divide => Number1 / Number2,
+            '-' => Number1 - Number2,
+            '*' => Number1 * Number2,
+            '/' => Number1 / Number2,
             _ => Number1 + Number2,
         };
     }
@@ -87,7 +87,22 @@ public class Game
             Operator.Subtract => '-',
             Operator.Multiply => '*',
             Operator.Divide => '/',
+            Operator.Random => GetRandomSymbol(),
             _ => '+'
         };
-    } 
+    }
+
+    private static char GetRandomSymbol()
+    {
+        Random rand = new();
+        int operation = rand.Next(4);
+        return operation switch 
+        {
+            0 => '+',
+            1 => '-',
+            2 => '*',
+            _ => '/',
+        };
+
+    }
 }

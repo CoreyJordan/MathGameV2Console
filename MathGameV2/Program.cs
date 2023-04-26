@@ -95,13 +95,14 @@ Difficulty GetDifficulty()
 
 static Operator GetGameMode(Player player)
 {
-    string[] options = new [] {"1", "2", "3", "4"};
+    string[] options = new [] {"1", "2", "3", "4", "5"};
     string choice;
 
     do
     {
         Console.WriteLine($"{player.PlayerName}, Choose from the following game types:");
         Console.Write($"1: {Operator.Add}, 2: {Operator.Subtract}, 3: {Operator.Multiply}, 4: {Operator.Divide} ");
+        Console.Write($"5: {Operator.Random} ");
         choice = Console.ReadLine()!;
         
         if (!options.Contains(choice))
@@ -117,6 +118,7 @@ static Operator GetGameMode(Player player)
         "2" => Operator.Subtract,
         "3" => Operator.Multiply,
         "4" => Operator.Divide,
+        "5" => Operator.Random,
         _ => Operator.Add
     };
 }
