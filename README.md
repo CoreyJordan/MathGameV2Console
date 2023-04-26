@@ -30,5 +30,6 @@
 <p>
   Base game finished 4/23/23<br>
   Difficulty added 4/23/23<br>
-  Timer added 4/23/23
+  Timer added 4/23/23<br>
+  Question count customization added 4/26/23
 </p>
