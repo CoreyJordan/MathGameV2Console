@@ -123,17 +123,22 @@ static Operator GetGameMode(Player player)
 
 void PlayRound(Player player)
 {
+    Operator gameType = GetGameMode(player);
+    Difficulty gameDifficulty = GetDifficulty();
+    Console.Write("How many questions for this round? ");
+    int numberOfQuestions = GetNumberFromPlayer(player);
+
     Game round = new()
     {
-        GameType = GetGameMode(player),
-        NumberOfQuestions = 10,
-        GameDifficulty = GetDifficulty(),
+        GameType = gameType,
+        GameDifficulty = gameDifficulty,
+        NumberOfQuestions = numberOfQuestions,
 };
     Stopwatch timer = Stopwatch.StartNew();
     for (int i = 0; i < round.NumberOfQuestions; i++)
     {
         Console.Write(round.GenerateProblem());
-        int guessNumber = GetPlayerGuess(player);
+        int guessNumber = GetNumberFromPlayer(player);
         bool isCorrect = round.CheckGuess(guessNumber);
         DisplayResult(isCorrect, player, round);
     }
@@ -143,16 +148,16 @@ void PlayRound(Player player)
     player.GameHistory.Add(round);
 }
 
-int GetPlayerGuess(Player player)
+int GetNumberFromPlayer(Player player)
 {
-    int playerGuess;
+    int playerNumber;
     string input = Console.ReadLine()!;
-    while (int.TryParse(input, out playerGuess) == false)
+    while (int.TryParse(input, out playerNumber) == false)
     {
         Console.Write($"Sorry {player.PlayerName}, that's not a valid number. Please try again: ");
         input = Console.ReadLine()!;
     }
-    return playerGuess;
+    return playerNumber;
 }
 
 void DisplayResult(bool isCorrect, Player player, Game round)
